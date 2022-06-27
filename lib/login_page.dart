@@ -6,8 +6,9 @@ class EmailFieldValidator {
   static String? validate(String? value) {
     return value!.isEmpty
         ? 'Email can\'t be empty'
-        : !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                .hasMatch(value)
+        : value.isNotEmpty &&
+                !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                    .hasMatch(value)
             ? 'Email can\'t be invalid'
             : null;
   }
@@ -15,13 +16,15 @@ class EmailFieldValidator {
 
 class PasswordFieldValidator {
   static String? validate(String? value) {
-    return value!.isEmpty ? 'Password can\'t be empty' : null;
+    return value!.isEmpty
+        ? 'Password can\'t be empty'
+        : value.toString().length == 7
+            ? 'Password should be 8 character long'
+            : null;
   }
 }
 
 class LoginPage extends StatefulWidget {
-  // const LoginPage({required this.onSignedIn});
-  // final VoidCallback onSignedIn;
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }

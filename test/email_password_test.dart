@@ -7,7 +7,7 @@ void main() {
     expect(result, 'Email can\'t be empty');
   });
   test('non-empty email returns null', () {
-    final result = EmailFieldValidator.validate("emailgmail.com");
+    final result = EmailFieldValidator.validate('mailgmailcom');
     expect(result, 'Email can\'t be invalid');
   });
 
@@ -15,9 +15,8 @@ void main() {
     final result = PasswordFieldValidator.validate('');
     expect(result, 'Password can\'t be empty');
   });
-
-  test('non-empty password returns null', () {
-    final result = PasswordFieldValidator.validate('password');
-    expect(result, null);
+  test('non-empty Password returns null', () {
+    final result = PasswordFieldValidator.validate('666666');
+    expect(result, 'Password should be 8 character long');
   });
 }
